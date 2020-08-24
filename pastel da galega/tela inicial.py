@@ -1,5 +1,5 @@
 from metodos import *
 
-# cabecalho()
-# cadastrar()
+cabecalho()
+atualizar()
 
