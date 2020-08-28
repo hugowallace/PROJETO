@@ -20,21 +20,25 @@ def cadastrar():
 
 
 def pesquisar():
-    p = input('Digite o nome do cliente: ')
+    p = input('Digite o nome do cliente: ').lower()
     s = cursor.execute(f"SELECT * FROM clientes WHERE nome = '{p}'" )
     for x in cursor.fetchall():
         print(x)
 
 
-def atualizar():
-    print('ATUALIZANDO CADASTRO DE CLIENTES!!!exit \nNome\nEndereço\nTelefone\nEXIT  para sair')
-    atualizador = input('Oque deseja atualizar ?').lower()
-    while atualizador not in 'exit':
-        if atualizador == 'nome':
-            nome = input('Digite o nome do cliente que deseja atualizar: ')
-        elif atualizador == 'endereço':
-            endereço = input('Digite o endereço do cliente que deseja atualizar: ')
-        elif atualizador == 'telefone':
-            telefone = input('Digite o telefone do cliente que deseja atualizar: ')
-        else:
-            atualizador = input('Digite nome, endereço ou telefone para atualizar alguma coisa!').lower()
+# def atualizar():
+#     print('ATUALIZANDO CADASTRO DE CLIENTES!!!exit \nNome\nEndereço\nTelefone\nEXIT  para sair')
+#     atualizador = input('Oque deseja atualizar ?').lower()
+#     while atualizador not in 'exit':
+#         if atualizador == 'nome':
+#             nome = input('Digite o nome do cliente que deseja atualizar: ')
+#         elif atualizador == 'endereço':
+#             endereço = input('Digite o endereço do cliente que deseja atualizar: ')
+#         elif atualizador == 'telefone':
+#             telefone = input('Digite o telefone do cliente que deseja atualizar: ')
+#         else:
+#             atualizador = input('Digite nome, endereço ou telefone para atualizar alguma coisa!').lower()
+
+
+def dropar():
+    cursor.execute(f"DROP TABLE produto")

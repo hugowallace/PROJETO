@@ -1,5 +1,3 @@
 from metodos import *
 
-cabecalho()
-atualizar()
-
+dropar()
