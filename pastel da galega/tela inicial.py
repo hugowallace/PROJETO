@@ -1,3 +1,6 @@
 from metodos import *
 
-dropar()
+
+
+
+fazer_pedido()
