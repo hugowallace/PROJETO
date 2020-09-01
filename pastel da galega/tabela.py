@@ -19,11 +19,8 @@ cursor.execute("""CREATE TABLE pedido(
 cursor.execute("""CREATE TABLE produto(
     id_produto INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     nome TEXT,
-    sabor1 TEXT DEFAULT '',
-    sabor2 TEXT DEFAULT '',
-    sabor3 TEXT DEFAULT '',
-    sabor4 TEXT DEFAULT '',
-    sabor5 TEXT DEFAULT '',
+    sabores5 TEXT DEFAULT '',
+    sabores3 TEXT DEFAULT '',
     preço text
 );""")
 

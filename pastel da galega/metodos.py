@@ -3,11 +3,19 @@ conn = sqlite3.connect('banco1.db')
 cursor = conn.cursor()
 
 
+def cabecalho2():
+    print("""
+Digite:
+CADASTRAR para cadastrar cliente;
+CARDAPIO para ver o cardapio;
+PEDIDO para fazer um pedido;
+PESQUISAR para pesquisar dados do cliente;
+S para sair.""")
 
 def cabecalho():
     print('#'*20)
-    print('##PASTEL DA GALEGA##')
-    print('#### DELIVERY ######')
+    print('PASTEL DA GALEGA'.center(20))
+    print('DELIVERY'.center(20))
     print('#'*20)
 
 def cadastrar():
@@ -16,14 +24,16 @@ def cadastrar():
     endereço = input('enredeço do cliente: ')
     cursor.execute(f"INSERT INTO clientes (nome, telefone, endereço) VALUES('{nome}', '{telefone}', '{endereço}');")
     conn.commit()
-
+def cadastrar_produtos():
+    produto = input('nome do produto: ')
 
 
 def pesquisar():
-    p = input('Digite o nome do cliente: ').lower()
-    s = cursor.execute(f"SELECT * FROM clientes WHERE nome = '{p}'" )
+    p = input('Digite o nome do cliente: ')
+    s = cursor.execute(f"SELECT * FROM clientes WHERE nome LIKE '%{p}%'" )
     for x in cursor.fetchall():
         print(x)
+    
 
 def cardapio():
     print("""
@@ -57,42 +67,58 @@ def cardapio():
     CREME DE CAMARÃO                    MOLHO DE ALHO
     CREME DE FRANGO                     OVO DE CODORNA
     """)
-def fazer_pedido():
-    print('FAÇA O PEDIDO')
-    pedido = input('').lower()
-    while pedido == 'pastel':
-        qtdsabor = input('pastel de 5 ou 3  sabores? ')
-        q = 1
-        if qtdsabor == 3:
-            for x in range(3):
-                x = input(f'Sabor {q}: ')
-                q += 1  
-        # sabor1 = input('digite o primeiro sabor: ').lower()
-        # qtdsabor += qtdsabor
-        # sabor2 = input('digite o segundo sabor: ').lower()
-        # qtdsabor += qtdsabor
-        # sabor3 = input('digite o terceiro sabor: ').lower()
-        # qtdsabor += qtdsabor
-        # sabor4 = input('digite o quarto sabor: ').lower()
-        # qtdsabor += qtdsabor
-        # sabor5 = input('digite o quinto sabor: ').lower()
-        # qtdsabor += qtdsabor
-        # sabores = ((sabor1), (sabor2), (sabor3), (sabor4), (sabor5),)
-        # print(sabores)
 
-# def atualizar():
-#     print('ATUALIZANDO CADASTRO DE CLIENTES!!!exit \nNome\nEndereço\nTelefone\nEXIT  para sair')
-#     atualizador = input('Oque deseja atualizar ?').lower()
-#     while atualizador not in 'exit':
-#         if atualizador == 'nome':
-#             nome = input('Digite o nome do cliente que deseja atualizar: ')
-#         elif atualizador == 'endereço':
-#             endereço = input('Digite o endereço do cliente que deseja atualizar: ')
-#         elif atualizador == 'telefone':
-#             telefone = input('Digite o telefone do cliente que deseja atualizar: ')
-#         else:
-#             atualizador = input('Digite nome, endereço ou telefone para atualizar alguma coisa!').lower()
+def fazer_pedido():
+    nome = input('Nome do cliente: ')
+    id_cliente = input('ID do cliente: ')
+    print('DIGITE UM ITEM POR VEZ')
+    cd_item = 1
+    contador = 'sim'
+    while contador == 'voltar':
+        pedido = input(f'ITEM {cd_item}: ').lower()
+        cd_item =+ 1
+        if pedido == 'pastel':
+            qtdsabor = int(input('pastel de 5 ou 3  sabores? '))
+            q = 1
+            if qtdsabor == 3:
+                for x in range(3):
+                    x = input(f'Sabor {q}: ')
+                    q += 1
+            elif qtdsabor == 5:
+                for x in range(5):
+                    x = input(f'Sabor {q}')
+                    q += 1
+            else:
+                print('Só temos pasteis de 5 ou 3  sabores!!!!')
+            cd_item =+ 1
+        elif pedido == 'coxinha':
+            sabor_coxinha = input('Sabor: ')
+            qtdcoxinha = int(input('Quantidade: '))
+           
+            cd_item =+ 1
+        elif pedido == 'cachorro quente':
+            cachorro_quente = input('completo? ')
+            
+            cd_item =+ 1
+        elif pedido == 'enroladinho':
+            enroladinho = input('completo? ')
+            cd_item =+ 1
+        else:
+            print(f'não temos {pedido} tente outra coisa')
+            contador = input('deseja sair ? ')   
+            cd_item =+ 1
+    # print('ATUALIZANDO CADASTRO DE CLIENTES!!!exit \nNome\nEndereço\nTelefone\nEXIT  para sair')
+    # atualizador = input('Oque deseja atualizar ?').lower()
+    # while atualizador not in 'exit':
+    #     if atualizador == 'nome':
+    #         nome = input('Digite o nome do cliente que deseja atualizar: ')
+    #     elif atualizador == 'endereço':
+    #         endereço = input('Digite o endereço do cliente que deseja atualizar: ')
+    #     elif atualizador == 'telefone':
+    #         telefone = input('Digite o telefone do cliente que deseja atualizar: ')
+    #     else:
+    #         atualizador = input('Digite nome, endereço ou telefone para atualizar alguma coisa!').lower()
 
 
 def dropar():
-    cursor.execute(f"DROP TABLE produto")
+    cursor.execute(f"DROP TABLE motos_honda")
